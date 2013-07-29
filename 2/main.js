@@ -20,28 +20,9 @@
 		var shieldRadius = 16;
 		var sectionRadius = shieldRadius / 6;
 
-		var outerPentagon = new THREE.Mesh(
-			new THREE.CircleGeometry(shieldRadius - 3 * sectionRadius, 5),
-			new THREE.MeshBasicMaterial({ color: 0x000000 })
-		);
-
-		var innerPentagon = new THREE.Mesh(
-			new THREE.CircleGeometry(shieldRadius - 4.5 * sectionRadius, 5),
-			new THREE.MeshBasicMaterial({ color: 0xffffff })
-		);
-
-		var lines = outerPentagon.geometry.vertices
-			.slice(1, -1)
-			.map(function(point, p, points) {
-				var p2 = (p + 2 >= points.length) ? p + 2 - points.length : p + 2;
-				// triangles.moveTo(point.x, point.y);
-				// triangles.lineTo(points[to].x, points[to].y);
-				var from = new THREE.Vector2(point.x, point.y);
-				var to = new THREE.Vector2(points[p2].x, points[p2].y);
-				return from.add(to);
-			});
-
-		var triangles = new THREE.Shape([
+		// Build the star in the center,
+		// vector-by-vector.
+		var pentagram = new THREE.Shape([
 			new THREE.Vector2(8 * Math.sin(0 * Math.PI / 5), 8 * Math.cos(0 * Math.PI / 5)),
 			new THREE.Vector2(4 * Math.sin(1 * Math.PI / 5), 4 * Math.cos(1 * Math.PI / 5)),
 			new THREE.Vector2(8 * Math.sin(2 * Math.PI / 5), 8 * Math.cos(2 * Math.PI / 5)),
@@ -51,15 +32,8 @@
 			new THREE.Vector2(8 * Math.sin(6 * Math.PI / 5), 8 * Math.cos(6 * Math.PI / 5)),
 			new THREE.Vector2(4 * Math.sin(7 * Math.PI / 5), 4 * Math.cos(7 * Math.PI / 5)),
 			new THREE.Vector2(8 * Math.sin(8 * Math.PI / 5), 8 * Math.cos(8 * Math.PI / 5)),
-			new THREE.Vector2(4 * Math.sin(9 * Math.PI / 5), 4 * Math.cos(9 * Math.PI / 5)),
+			new THREE.Vector2(4 * Math.sin(9 * Math.PI / 5), 4 * Math.cos(9 * Math.PI / 5))
 		]);
-
-		// triangles.faces.push(new THREE.Face3(0, 2, 3));
-
-		var star = new THREE.Mesh(
-			new THREE.ShapeGeometry(triangles),
-			new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide })
-		);
 
 		var shapes = [
 			new THREE.Mesh(
@@ -83,11 +57,15 @@
 			),
 
 			// Star.
-			// outerPentagon,
-			// innerPentagon,
-			star,
+			new THREE.Mesh(
+				new THREE.ShapeGeometry(pentagram),
+				new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide })
+			)
 		];
 
+		// Draw the shapes.
+		// Apparently order matters--likely since everything is on the same plane.
+		// Therefore, we draw them in the opposite order we defined them in.
 		shapes
 		.reverse()
 		.forEach(function(shape) {
