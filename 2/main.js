@@ -30,15 +30,15 @@
 		// vector-by-vector.
 		var pentagram = new THREE.Shape([
 			new THREE.Vector2(8 * Math.sin(0 * Math.PI / 5), 8 * Math.cos(0 * Math.PI / 5)),
-			new THREE.Vector2(4 * Math.sin(1 * Math.PI / 5), 4 * Math.cos(1 * Math.PI / 5)),
+			new THREE.Vector2(3 * Math.sin(1 * Math.PI / 5), 3 * Math.cos(1 * Math.PI / 5)),
 			new THREE.Vector2(8 * Math.sin(2 * Math.PI / 5), 8 * Math.cos(2 * Math.PI / 5)),
-			new THREE.Vector2(4 * Math.sin(3 * Math.PI / 5), 4 * Math.cos(3 * Math.PI / 5)),
+			new THREE.Vector2(3 * Math.sin(3 * Math.PI / 5), 3 * Math.cos(3 * Math.PI / 5)),
 			new THREE.Vector2(8 * Math.sin(4 * Math.PI / 5), 8 * Math.cos(4 * Math.PI / 5)),
-			new THREE.Vector2(4 * Math.sin(5 * Math.PI / 5), 4 * Math.cos(5 * Math.PI / 5)),
+			new THREE.Vector2(3 * Math.sin(5 * Math.PI / 5), 3 * Math.cos(5 * Math.PI / 5)),
 			new THREE.Vector2(8 * Math.sin(6 * Math.PI / 5), 8 * Math.cos(6 * Math.PI / 5)),
-			new THREE.Vector2(4 * Math.sin(7 * Math.PI / 5), 4 * Math.cos(7 * Math.PI / 5)),
+			new THREE.Vector2(3 * Math.sin(7 * Math.PI / 5), 3 * Math.cos(7 * Math.PI / 5)),
 			new THREE.Vector2(8 * Math.sin(8 * Math.PI / 5), 8 * Math.cos(8 * Math.PI / 5)),
-			new THREE.Vector2(4 * Math.sin(9 * Math.PI / 5), 4 * Math.cos(9 * Math.PI / 5))
+			new THREE.Vector2(3 * Math.sin(9 * Math.PI / 5), 3 * Math.cos(9 * Math.PI / 5))
 		]);
 
 		var shapes = [
