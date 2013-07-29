@@ -2,21 +2,27 @@
 	// INIT
 	var scene, camera, renderer;
 	(function() {
+		// Create the scene and camera.
 		scene = new THREE.Scene();
 		camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
+		// Access the WebGL context.
 		renderer = new THREE.WebGLRenderer({antialias: true});
+
+		// Add the canvas output to the page.
 		renderer.setSize(window.innerWidth, window.innerHeight);
 		document.body.appendChild(renderer.domElement);
 	})();
 
 	// SETUP
 	(function() {
-		camera.position.z = 32;
+		// Raise the camera off the "ground" a bit.
+		camera.position.z = 24;
 	})();
 
 	// DRAW
 	(function() {
+		// Some radius variables for easy changing.
 		var shieldRadius = 16;
 		var sectionRadius = shieldRadius / 6;
 
@@ -36,27 +42,25 @@
 		]);
 
 		var shapes = [
+			// The rings.
 			new THREE.Mesh(
 				new THREE.CircleGeometry(shieldRadius, 64),
 				new THREE.MeshBasicMaterial({ color: 0xbb0000, side: THREE.DoubleSide })
 			),
-
 			new THREE.Mesh(
 				new THREE.CircleGeometry(shieldRadius - sectionRadius, 64),
 				new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide })
 			),
-
 			new THREE.Mesh(
 				new THREE.CircleGeometry(shieldRadius - 2 * sectionRadius, 64),
 				new THREE.MeshBasicMaterial({ color: 0xbb0000, side: THREE.DoubleSide })
 			),
-
 			new THREE.Mesh(
 				new THREE.CircleGeometry(shieldRadius - 3 * sectionRadius, 64),
 				new THREE.MeshBasicMaterial({ color: 0x15659e, side: THREE.DoubleSide })
 			),
 
-			// Star.
+			// The star.
 			new THREE.Mesh(
 				new THREE.ShapeGeometry(pentagram),
 				new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide })
@@ -74,6 +78,7 @@
 	})();
 
 	// START
+	// Run the animation loop.
 	(function render() {
 		requestAnimationFrame(render);
 		renderer.render(scene, camera);
