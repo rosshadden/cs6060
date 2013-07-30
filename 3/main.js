@@ -1,4 +1,8 @@
+var PI = Math.PI;
+
 (function(window, undefined) {
+	"use strict";
+
 	// INIT
 	var scene, camera, renderer;
 	(function() {
@@ -16,10 +20,68 @@
 
 	// SETUP
 	(function() {
+		camera.lookAt(new THREE.Vector3(0, 0, 1));
+		camera.position.set(0, 0, 0);
+		scene.add(camera);
+
+		// Show axes, for debugging.
+		var axes = new THREE.AxisHelper(10);
+		scene.add(axes);
 	})();
 
 	// DRAW
 	(function() {
+		var walls = {
+			north: new THREE
+				.Mesh(
+					new THREE.PlaneGeometry(128, 64),
+					new THREE.MeshBasicMaterial({ color: 0x990000, side: THREE.DoubleSide })
+				)
+				.translateX(0)
+				.translateY(0)
+				.translateZ(-64),
+			south: new THREE
+				.Mesh(
+					new THREE.PlaneGeometry(128, 64),
+					new THREE.MeshBasicMaterial({ color: 0x009900, side: THREE.DoubleSide })
+				)
+				.translateX(0)
+				.translateY(0)
+				.translateZ(64),
+			east: new THREE
+				.Mesh(
+					new THREE.PlaneGeometry(128, 64),
+					new THREE.MeshBasicMaterial({ color: 0x000099, side: THREE.DoubleSide })
+				)
+				.rotateY(PI / 2)
+				.translateX(0)
+				.translateY(0)
+				.translateZ(-64),
+			west: new THREE
+				.Mesh(
+					new THREE.PlaneGeometry(128, 64),
+					new THREE.MeshBasicMaterial({ color: 0x009999, side: THREE.DoubleSide })
+				)
+				.rotateY(-PI / 2)
+				.translateX(0)
+				.translateY(0)
+				.translateZ(-64),
+			top: new THREE
+				.Mesh(
+					new THREE.PlaneGeometry(128, 64),
+					new THREE.MeshBasicMaterial({ color: 0x990099, side: THREE.DoubleSide })
+				)
+				.rotateZ(PI / 2)
+				.translateX(0)
+				.translateY(-64)
+				.translateZ(0)
+		};
+
+		scene.add(walls.north);
+		scene.add(walls.south);
+		scene.add(walls.east);
+		scene.add(walls.west);
+		scene.add(walls.top);
 	})();
 
 	// START
