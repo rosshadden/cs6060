@@ -42,7 +42,7 @@
 			north: new THREE
 				.Mesh(
 					new THREE.PlaneGeometry(128, 64),
-					new THREE.MeshBasicMaterial({ color: 0x990000, side: THREE.DoubleSide })
+					new THREE.MeshBasicMaterial({ color: 0xcccccc, side: THREE.DoubleSide })
 				)
 				.translateX(0)
 				.translateY(0)
@@ -50,7 +50,7 @@
 			south: new THREE
 				.Mesh(
 					new THREE.PlaneGeometry(128, 64),
-					new THREE.MeshBasicMaterial({ color: 0x009900, side: THREE.DoubleSide })
+					new THREE.MeshBasicMaterial({ color: 0xcccccc, side: THREE.DoubleSide })
 				)
 				.translateX(0)
 				.translateY(0)
@@ -58,7 +58,7 @@
 			east: new THREE
 				.Mesh(
 					new THREE.PlaneGeometry(128, 64),
-					new THREE.MeshBasicMaterial({ color: 0x000099, side: THREE.DoubleSide })
+					new THREE.MeshBasicMaterial({ color: 0xcccccc, side: THREE.DoubleSide })
 				)
 				.rotateY(PI / 2)
 				.translateX(0)
@@ -67,7 +67,7 @@
 			west: new THREE
 				.Mesh(
 					new THREE.PlaneGeometry(128, 64),
-					new THREE.MeshBasicMaterial({ color: 0x009999, side: THREE.DoubleSide })
+					new THREE.MeshBasicMaterial({ color: 0xcccccc, side: THREE.DoubleSide })
 				)
 				.rotateY(-PI / 2)
 				.translateX(0)
@@ -76,7 +76,7 @@
 			ceiling: new THREE
 				.Mesh(
 					new THREE.PlaneGeometry(128, 128),
-					new THREE.MeshBasicMaterial({ color: 0x990099, side: THREE.DoubleSide })
+					new THREE.MeshBasicMaterial({ color: 0x333333, side: THREE.DoubleSide })
 				)
 				.rotateX(PI / 2)
 				.translateX(0)
@@ -85,7 +85,7 @@
 			floor: new THREE
 				.Mesh(
 					new THREE.PlaneGeometry(128, 128),
-					new THREE.MeshBasicMaterial({ color: 0x990099, side: THREE.DoubleSide })
+					new THREE.MeshBasicMaterial({ color: 0x336666, side: THREE.DoubleSide })
 				)
 				.rotateX(PI / 2)
 				.translateX(0)
