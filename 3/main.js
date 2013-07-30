@@ -8,7 +8,7 @@ var PI = Math.PI;
 	(function() {
 		// Create the scene and camera.
 		scene = new THREE.Scene();
-		camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+		camera = window.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
 		// Access the WebGL context.
 		renderer = new THREE.WebGLRenderer({antialias: true});
@@ -20,6 +20,7 @@ var PI = Math.PI;
 
 	// SETUP
 	(function() {
+		camera.speed = 2;
 		camera.lookAt(new THREE.Vector3(0, 0, 1));
 		camera.position.set(0, 0, 0);
 		scene.add(camera);
@@ -87,6 +88,19 @@ var PI = Math.PI;
 	// START
 	// Run the animation loop.
 	(function render() {
+		if (KeyboardJS.combo.active("w")) {
+			camera.position.z += camera.speed;
+		}
+		if (KeyboardJS.combo.active("s")) {
+			camera.position.z -= camera.speed;
+		}
+		if (KeyboardJS.combo.active("a")) {
+			camera.position.x += camera.speed;
+		}
+		if (KeyboardJS.combo.active("d")) {
+			camera.position.x -= camera.speed;
+		}
+
 		requestAnimationFrame(render);
 		renderer.render(scene, camera);
 	})();
