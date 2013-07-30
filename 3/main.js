@@ -9,6 +9,17 @@
 		matrix: new THREE.Matrix4()
 	};
 
+	var rotWorldMatrix;
+	// Rotate an object around an arbitrary axis in world space.
+	var rotateAroundAxis = function(object, axis, radians) {
+		rotWorldMatrix = new THREE.Matrix4();
+		rotWorldMatrix.makeRotationAxis(axis.normalize(), radians);
+		// Pre-multiply.
+		rotWorldMatrix.multiply(object.matrix);
+		object.matrix = rotWorldMatrix;
+		object.rotation.setFromRotationMatrix(object.matrix);
+	};
+
 	// INIT
 	var scene, camera, renderer;
 	(function() {
@@ -231,11 +242,11 @@
 		}
 		// Turn left.
 		if (KeyboardJS.combo.active("left")) {
-			camera.applyMatrix(axes.matrix.makeRotationAxis(axes.y, +PI/64));
+			rotateAroundAxis(camera, axes.y, +PI/64);
 		}
 		// Turn right.
 		if (KeyboardJS.combo.active("right")) {
-			camera.applyMatrix(axes.matrix.makeRotationAxis(axes.y, -PI/64));
+			rotateAroundAxis(camera, axes.y, -PI/64);
 		}
 		// Move faster.
 		if (KeyboardJS.combo.active("shift")) {
@@ -247,4 +258,7 @@
 		requestAnimationFrame(render);
 		renderer.render(scene, camera);
 	})();
+
+	// DEBUG
+	window.camera = camera;
 })(this);
