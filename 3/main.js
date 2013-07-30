@@ -20,7 +20,7 @@ var PI = Math.PI;
 
 	// SETUP
 	(function() {
-		camera.speed = 2;
+		camera.speed = 1;
 		camera.lookAt(new THREE.Vector3(0, 0, 1));
 		camera.position.set(0, 0, 0);
 		scene.add(camera);
@@ -89,22 +89,22 @@ var PI = Math.PI;
 	// Run the animation loop.
 	(function render() {
 		if (KeyboardJS.combo.active("w")) {
-			camera.position.z += camera.speed;
+			camera.translateZ(-camera.speed);
 		}
 		if (KeyboardJS.combo.active("s")) {
-			camera.position.z -= camera.speed;
+			camera.translateZ(camera.speed);
 		}
 		if (KeyboardJS.combo.active("a")) {
-			camera.position.x += camera.speed;
+			camera.translateX(-camera.speed);
 		}
 		if (KeyboardJS.combo.active("d")) {
-			camera.position.x -= camera.speed;
+			camera.translateX(camera.speed);
 		}
 		if (KeyboardJS.combo.active("space")) {
-			camera.position.y += camera.speed;
+			camera.translateY(camera.speed);
 		}
 		if (KeyboardJS.combo.active("shift")) {
-			camera.position.y -= camera.speed;
+			camera.translateY(-camera.speed);
 		}
 		if (KeyboardJS.combo.active("up")) {
 			camera.rotation.x -= PI / 64;
