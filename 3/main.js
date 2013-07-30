@@ -92,31 +92,31 @@ var PI = Math.PI;
 			camera.translateZ(-camera.speed);
 		}
 		if (KeyboardJS.combo.active("s")) {
-			camera.translateZ(camera.speed);
+			camera.translateZ(+camera.speed);
 		}
 		if (KeyboardJS.combo.active("a")) {
 			camera.translateX(-camera.speed);
 		}
 		if (KeyboardJS.combo.active("d")) {
-			camera.translateX(camera.speed);
+			camera.translateX(+camera.speed);
 		}
 		if (KeyboardJS.combo.active("space")) {
-			camera.translateY(camera.speed);
+			camera.translateY(+camera.speed);
 		}
 		if (KeyboardJS.combo.active("shift")) {
 			camera.translateY(-camera.speed);
 		}
 		if (KeyboardJS.combo.active("up")) {
-			camera.rotation.x -= PI / 64;
+			camera.rotateX(+PI / 64);
 		}
 		if (KeyboardJS.combo.active("down")) {
-			camera.rotation.x += PI / 64;
+			camera.rotateX(-PI / 64);
 		}
 		if (KeyboardJS.combo.active("left")) {
-			camera.rotation.y -= PI / 64;
+			camera.rotateY(+PI / 64);
 		}
 		if (KeyboardJS.combo.active("right")) {
-			camera.rotation.y += PI / 64;
+			camera.rotateY(-PI / 64);
 		}
 
 		requestAnimationFrame(render);
