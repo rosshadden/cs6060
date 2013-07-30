@@ -177,10 +177,17 @@
 		var chair = new THREE
 			.Mesh(chairModel, new THREE.MeshFaceMaterial(materials))
 			.rotateY(PI/2)
-			.translateX(-32)
+			.translateX(-48)
 			.translateY(-15)
 			.translateZ(-32)
 		;
+
+		var numChairs = 6;
+		for (var c = 0; c < numChairs; c++) {
+			scene.add(
+				chair.clone().translateX(c * 20)
+			)
+		}
 
 		scene.add(chair);
 	})();
