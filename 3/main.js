@@ -190,7 +190,7 @@
 			.rotateY(PI/2)
 			.translateX(-48)
 			.translateY(-15)
-			.translateZ(-32)
+			.translateZ(-48)
 		;
 
 		var numChairs = 6;
