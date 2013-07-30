@@ -72,10 +72,10 @@ var PI = Math.PI;
 					new THREE.PlaneGeometry(128, 64),
 					new THREE.MeshBasicMaterial({ color: 0x990099, side: THREE.DoubleSide })
 				)
-				.rotateZ(PI / 2)
+				.rotateX(PI / 2)
 				.translateX(0)
-				.translateY(-64)
-				.translateZ(0)
+				.translateY(0)
+				.translateZ(-32)
 		};
 
 		scene.add(walls.north);
@@ -99,6 +99,24 @@ var PI = Math.PI;
 		}
 		if (KeyboardJS.combo.active("d")) {
 			camera.position.x -= camera.speed;
+		}
+		if (KeyboardJS.combo.active("space")) {
+			camera.position.y += camera.speed;
+		}
+		if (KeyboardJS.combo.active("shift")) {
+			camera.position.y -= camera.speed;
+		}
+		if (KeyboardJS.combo.active("up")) {
+			camera.rotation.x -= PI / 64;
+		}
+		if (KeyboardJS.combo.active("down")) {
+			camera.rotation.x += PI / 64;
+		}
+		if (KeyboardJS.combo.active("left")) {
+			camera.rotation.y -= PI / 64;
+		}
+		if (KeyboardJS.combo.active("right")) {
+			camera.rotation.y += PI / 64;
 		}
 
 		requestAnimationFrame(render);
