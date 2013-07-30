@@ -92,39 +92,51 @@
 	})();
 
 	// START
-	// Run the animation loop.
 	var cameraSpeed;
+	// Run the animation loop.
 	(function render() {
+		// Camera movement.
+		// Move forward.
 		if (KeyboardJS.combo.active("w")) {
 			camera.translateZ(-cameraSpeed);
 		}
+		// Move backward.
 		if (KeyboardJS.combo.active("s")) {
 			camera.translateZ(+cameraSpeed);
 		}
+		// Move left.
 		if (KeyboardJS.combo.active("a")) {
 			camera.translateX(-cameraSpeed);
 		}
+		// Move right.
 		if (KeyboardJS.combo.active("d")) {
 			camera.translateX(+cameraSpeed);
 		}
+		// Move up.
 		if (KeyboardJS.combo.active("space")) {
 			camera.translateY(+cameraSpeed);
 		}
+		// Move down.
 		if (KeyboardJS.combo.active("c")) {
 			camera.translateY(-cameraSpeed);
 		}
+		// Look up.
 		if (KeyboardJS.combo.active("up")) {
 			camera.rotateX(+PI/64);
 		}
+		// Look down.
 		if (KeyboardJS.combo.active("down")) {
 			camera.rotateX(-PI/64);
 		}
+		// Turn left.
 		if (KeyboardJS.combo.active("left")) {
 			camera.applyMatrix(axes.matrix.makeRotationAxis(axes.y, +PI/64));
 		}
+		// Turn right.
 		if (KeyboardJS.combo.active("right")) {
 			camera.applyMatrix(axes.matrix.makeRotationAxis(axes.y, -PI/64));
 		}
+		// Move faster.
 		if (KeyboardJS.combo.active("shift")) {
 			cameraSpeed = 4 * camera.speed;
 		} else {
