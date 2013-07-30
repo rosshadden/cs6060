@@ -73,7 +73,7 @@
 				.translateX(0)
 				.translateY(0)
 				.translateZ(-64),
-			top: new THREE
+			ceiling: new THREE
 				.Mesh(
 					new THREE.PlaneGeometry(128, 128),
 					new THREE.MeshBasicMaterial({ color: 0x990099, side: THREE.DoubleSide })
@@ -81,14 +81,24 @@
 				.rotateX(PI / 2)
 				.translateX(0)
 				.translateY(0)
-				.translateZ(-32)
+				.translateZ(-32),
+			floor: new THREE
+				.Mesh(
+					new THREE.PlaneGeometry(128, 128),
+					new THREE.MeshBasicMaterial({ color: 0x990099, side: THREE.DoubleSide })
+				)
+				.rotateX(PI / 2)
+				.translateX(0)
+				.translateY(0)
+				.translateZ(32)
 		};
 
 		scene.add(walls.north);
 		scene.add(walls.south);
 		scene.add(walls.east);
 		scene.add(walls.west);
-		scene.add(walls.top);
+		scene.add(walls.ceiling);
+		scene.add(walls.floor);
 	})();
 
 	// START
