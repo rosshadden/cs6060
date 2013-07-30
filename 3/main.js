@@ -46,7 +46,8 @@
 				)
 				.translateX(0)
 				.translateY(0)
-				.translateZ(-64),
+				.translateZ(-64)
+			,
 			south: new THREE
 				.Mesh(
 					new THREE.PlaneGeometry(128, 64),
@@ -54,7 +55,8 @@
 				)
 				.translateX(0)
 				.translateY(0)
-				.translateZ(64),
+				.translateZ(64)
+			,
 			east: new THREE
 				.Mesh(
 					new THREE.PlaneGeometry(128, 64),
@@ -63,7 +65,8 @@
 				.rotateY(PI / 2)
 				.translateX(0)
 				.translateY(0)
-				.translateZ(-64),
+				.translateZ(-64)
+			,
 			west: new THREE
 				.Mesh(
 					new THREE.PlaneGeometry(128, 64),
@@ -72,7 +75,8 @@
 				.rotateY(-PI / 2)
 				.translateX(0)
 				.translateY(0)
-				.translateZ(-64),
+				.translateZ(-64)
+			,
 			ceiling: new THREE
 				.Mesh(
 					new THREE.PlaneGeometry(128, 128),
@@ -81,7 +85,8 @@
 				.rotateX(PI / 2)
 				.translateX(0)
 				.translateY(0)
-				.translateZ(-32),
+				.translateZ(-32)
+			,
 			floor: new THREE
 				.Mesh(
 					new THREE.PlaneGeometry(128, 128),
@@ -99,6 +104,85 @@
 		scene.add(walls.west);
 		scene.add(walls.ceiling);
 		scene.add(walls.floor);
+
+		var chairParts = {
+			back: new THREE.Mesh(
+				new THREE.CubeGeometry(12, 16, 1),
+				new THREE.MeshBasicMaterial({ color: 0x855E42 })
+			),
+			seat: new THREE
+				.Mesh(
+					new THREE.CubeGeometry(12, 1, 12),
+					new THREE.MeshBasicMaterial({ color: 0x331100 })
+				)
+				.translateY(-8.5)
+				.translateZ(5.5)
+			,
+			legs: [
+				new THREE
+					.Mesh(
+						new THREE.CylinderGeometry(1, 1, 8),
+						new THREE.MeshBasicMaterial({ color: 0x221100 })
+					)
+					.translateX(-4)
+					.translateY(-13)
+					.translateZ(1)
+				,
+				new THREE
+					.Mesh(
+						new THREE.CylinderGeometry(1, 1, 8),
+						new THREE.MeshBasicMaterial({ color: 0x221100 })
+					)
+					.translateX(4)
+					.translateY(-13)
+					.translateZ(1)
+				,
+				new THREE
+					.Mesh(
+						new THREE.CylinderGeometry(1, 1, 8),
+						new THREE.MeshBasicMaterial({ color: 0x221100 })
+					)
+					.translateX(-4)
+					.translateY(-13)
+					.translateZ(10)
+				,
+				new THREE
+					.Mesh(
+						new THREE.CylinderGeometry(1, 1, 8),
+						new THREE.MeshBasicMaterial({ color: 0x221100 })
+					)
+					.translateX(4)
+					.translateY(-13)
+					.translateZ(10)
+			]
+		};
+
+		var materials = [
+			chairParts.seat.material,
+			chairParts.back.material
+		];
+
+		var chairModel = new THREE.Geometry();
+		THREE.GeometryUtils.setMaterialIndex(chairParts.seat.geometry, 0);
+		THREE.GeometryUtils.merge(chairModel, chairParts.seat);
+		THREE.GeometryUtils.setMaterialIndex(chairParts.back.geometry, 1);
+		THREE.GeometryUtils.merge(chairModel, chairParts.back);
+
+		chairParts.legs.forEach(function(leg, l) {
+			materials.push(leg.material);
+			THREE.GeometryUtils.setMaterialIndex(leg.geometry, l + 2);
+			THREE.GeometryUtils.merge(chairModel, leg);
+		});
+
+		var chair = new THREE
+			.Mesh(chairModel, new THREE.MeshFaceMaterial(materials))
+			.rotateY(PI/2)
+			.translateX(-32)
+			.translateY(-15)
+			.translateZ(-32)
+		;
+
+		scene.add(chair);
 	})();
 
 	// START
