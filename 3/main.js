@@ -75,7 +75,7 @@
 				.translateZ(-64),
 			top: new THREE
 				.Mesh(
-					new THREE.PlaneGeometry(128, 64),
+					new THREE.PlaneGeometry(128, 128),
 					new THREE.MeshBasicMaterial({ color: 0x990099, side: THREE.DoubleSide })
 				)
 				.rotateX(PI / 2)
@@ -93,24 +93,25 @@
 
 	// START
 	// Run the animation loop.
+	var cameraSpeed;
 	(function render() {
 		if (KeyboardJS.combo.active("w")) {
-			camera.translateZ(-camera.speed);
+			camera.translateZ(-cameraSpeed);
 		}
 		if (KeyboardJS.combo.active("s")) {
-			camera.translateZ(+camera.speed);
+			camera.translateZ(+cameraSpeed);
 		}
 		if (KeyboardJS.combo.active("a")) {
-			camera.translateX(-camera.speed);
+			camera.translateX(-cameraSpeed);
 		}
 		if (KeyboardJS.combo.active("d")) {
-			camera.translateX(+camera.speed);
+			camera.translateX(+cameraSpeed);
 		}
 		if (KeyboardJS.combo.active("space")) {
-			camera.translateY(+camera.speed);
+			camera.translateY(+cameraSpeed);
 		}
-		if (KeyboardJS.combo.active("shift")) {
-			camera.translateY(-camera.speed);
+		if (KeyboardJS.combo.active("c")) {
+			camera.translateY(-cameraSpeed);
 		}
 		if (KeyboardJS.combo.active("up")) {
 			camera.rotateX(+PI/64);
@@ -123,6 +124,11 @@
 		}
 		if (KeyboardJS.combo.active("right")) {
 			camera.applyMatrix(axes.matrix.makeRotationAxis(axes.y, -PI/64));
+		}
+		if (KeyboardJS.combo.active("shift")) {
+			cameraSpeed = 4 * camera.speed;
+		} else {
+			cameraSpeed = camera.speed;
 		}
 
 		requestAnimationFrame(render);
