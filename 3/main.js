@@ -109,7 +109,15 @@
 			floor: new THREE
 				.Mesh(
 					new THREE.PlaneGeometry(128, 128),
-					new THREE.MeshBasicMaterial({ color: 0x336666, side: THREE.DoubleSide })
+					new THREE.MeshBasicMaterial({
+						side: THREE.DoubleSide,
+						map: (function() {
+							var texture = new THREE.ImageUtils.loadTexture("../images/checkerboard.jpg")
+							texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+							texture.repeat.set(5, 5);
+							return texture;
+						})()
+					})
 				)
 				.rotateX(PI / 2)
 				.translateX(0)
