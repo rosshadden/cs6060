@@ -188,7 +188,7 @@
 
 		var tube = new THREE.Mesh(
 			new THREE.CylinderGeometry(16, 16, 62, 64),
-			new THREE.MeshBasicMaterial({ color: 0x7EB6FF, transparent: true, opacity: 0.5 })
+			new THREE.MeshBasicMaterial({ color: 0x7EB6FF, transparent: true, opacity: 0.4 })
 		);
 
 		var face = (function() {
