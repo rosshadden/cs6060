@@ -172,19 +172,19 @@
 				chairParts.back.material
 			];
 
-			var chairModel = new THREE.Geometry();
+			var chair = new THREE.Geometry();
 			THREE.GeometryUtils.setMaterialIndex(chairParts.seat.geometry, 0);
-			THREE.GeometryUtils.merge(chairModel, chairParts.seat);
+			THREE.GeometryUtils.merge(chair, chairParts.seat);
 			THREE.GeometryUtils.setMaterialIndex(chairParts.back.geometry, 1);
-			THREE.GeometryUtils.merge(chairModel, chairParts.back);
+			THREE.GeometryUtils.merge(chair, chairParts.back);
 
 			chairParts.legs.forEach(function(leg, l) {
 				materials.push(leg.material);
 				THREE.GeometryUtils.setMaterialIndex(leg.geometry, l + 2);
-				THREE.GeometryUtils.merge(chairModel, leg);
+				THREE.GeometryUtils.merge(chair, leg);
 			});
 
-			return new THREE.Mesh(chairModel, new THREE.MeshFaceMaterial(materials))
+			return new THREE.Mesh(chair, new THREE.MeshFaceMaterial(materials))
 				.rotateY(PI/2)
 				.translateX(-48)
 				.translateY(-15)
@@ -193,11 +193,64 @@
 
 		var tube = new THREE.Mesh(
 			new THREE.CylinderGeometry(16, 16, 62, 64),
-			new THREE.MeshBasicMaterial({ color: 0x7EB6FF, transparent: true, opacity: 0.5 })
+			new THREE.MeshBasicMaterial({ color: 0x7EB6FF, transparent: true, opacity: 0.4 })
 		);
 
 		var face = (function() {
-			// var head = new THREE.SphereGeometr
+			var face = new THREE.Geometry();
+
+			var head = new THREE.SphereGeometry(12, 64, 64);
+
+			var nose = new THREE
+				.Mesh(
+					new THREE.CylinderGeometry(1, 0, 1),
+					new THREE.MeshBasicMaterial({ color: 0xeebb99 })
+				)
+				.translateZ(-12.5)
+				.rotateX(PI / 2)
+			;
+
+			var eye = new THREE
+				.Mesh(
+					new THREE.CylinderGeometry(2, 0, 1),
+					new THREE.MeshBasicMaterial({ color: 0xffffff })
+				)
+				.translateY(4)
+				.translateZ(-11)
+				.rotateX(PI / 2)
+			;
+
+			var eyes = [
+				eye.clone().translateX(3),
+				eye.clone().translateX(-3)
+			];
+
+			var mouth = new THREE
+				.Mesh(
+					new THREE.CylinderGeometry(2, 0, 1),
+					new THREE.MeshBasicMaterial({ color: 0xff0000 })
+				)
+				.translateY(-4)
+				.translateZ(-12)
+				.rotateX(PI / 2)
+			;
+
+			THREE.GeometryUtils.setMaterialIndex(head, 0);
+			THREE.GeometryUtils.setMaterialIndex(nose.geometry, 1);
+			THREE.GeometryUtils.setMaterialIndex(eyes[0].geometry, 2);
+			THREE.GeometryUtils.setMaterialIndex(eyes[1].geometry, 2);
+			THREE.GeometryUtils.merge(face, head);
+			THREE.GeometryUtils.merge(face, nose);
+			THREE.GeometryUtils.merge(face, eyes[0]);
+			THREE.GeometryUtils.merge(face, eyes[1]);
+
+			var materials = [
+				new THREE.MeshBasicMaterial({ color: 0xFFCC99 }),
+				nose.material,
+				eye.material
+			];
+
+			return new THREE.Mesh(face, new THREE.MeshFaceMaterial(materials));
 		})();
 
 		return {
@@ -224,8 +277,10 @@
 			scene.add(models.chair.clone().translateX(c * 20));
 		}
 
-		// Add the tube for the head to sit on.
+		// Add the tube for the face.
 		scene.add(models.tube);
+		// Add the face.
+		scene.add(models.face);
 	})();
 
 	// START
