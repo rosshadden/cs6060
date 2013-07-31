@@ -50,8 +50,8 @@
 		scene.add(camera);
 
 		// Show axes, for debugging.
-		var axisHelper = new THREE.AxisHelper(10);
-		scene.add(axisHelper);
+		// var axisHelper = new THREE.AxisHelper(10);
+		// scene.add(axisHelper);
 	})();
 
 	// MODELS
@@ -191,18 +191,20 @@
 				.translateZ(-48);
 		})();
 
-		var pedestal = new THREE
-			.Mesh(
-				new THREE.CubeGeometry(16, 24, 16),
-				new THREE.MeshBasicMaterial({ color: 0x957E62 })
-			)
-			.translateY(-20)
-		;
+		var tube = new THREE.Mesh(
+			new THREE.CylinderGeometry(16, 16, 62, 64),
+			new THREE.MeshBasicMaterial({ color: 0x7EB6FF, transparent: true, opacity: 0.5 })
+		);
+
+		var face = (function() {
+			// var head = new THREE.SphereGeometr
+		})();
 
 		return {
 			walls: walls,
 			chair: chair,
-			pedestal: pedestal
+			tube: tube,
+			face: face
 		};
 	})();
 
@@ -222,8 +224,8 @@
 			scene.add(models.chair.clone().translateX(c * 20));
 		}
 
-		// Add the pedestal for the head to sit on.
-		scene.add(models.pedestal);
+		// Add the tube for the head to sit on.
+		scene.add(models.tube);
 	})();
 
 	// START
