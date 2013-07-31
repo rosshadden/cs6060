@@ -139,7 +139,7 @@
 				seat: new THREE
 					.Mesh(
 						new THREE.CubeGeometry(12, 1, 12),
-						material
+						new THREE.MeshBasicMaterial({ color: 0x331100 })
 					)
 					.translateY(-8.5)
 					.translateZ(5.5)
