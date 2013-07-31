@@ -233,6 +233,7 @@
 				.translateY(-4)
 				.translateZ(-12)
 				.rotateX(PI / 2)
+				.rotateY(PI)
 			;
 
 			THREE.GeometryUtils.setMaterialIndex(head, 0);
@@ -283,10 +284,8 @@
 		scene.add(models.face);
 	})();
 
-	// START
 	var cameraSpeed;
-	// Run the animation loop.
-	(function render() {
+	var controls = function() {
 		// Camera movement.
 		// Move forward.
 		if (KeyboardJS.combo.active("w")) {
@@ -334,11 +333,26 @@
 		} else {
 			cameraSpeed = camera.speed;
 		}
+	};
 
+	var update = function() {
+		models.face.lookAt(camera.position.clone().multiplyScalar(-1));
+	};
+
+	// START
+	// Run the animation loop.
+	(function render() {
+		// Loop-de-loop.
 		requestAnimationFrame(render);
+		// Handle user input.
+		controls();
+		// Update anything else necessary.
+		update();
+		// Render the scene, from the perspective of the camera.
 		renderer.render(scene, camera);
 	})();
 
 	// DEBUG
 	window.camera = camera;
+	window.models = models;
 })(this);
