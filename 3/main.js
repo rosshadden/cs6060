@@ -56,12 +56,22 @@
 
 	// MODELS
 	var models = (function() {
+		var wallMaterial = new THREE.MeshBasicMaterial({
+			side: THREE.DoubleSide,
+			map: (function() {
+				var texture = new THREE.ImageUtils.loadTexture("../images/wallpaper.jpg");
+				texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+				texture.repeat.set(2, 2);
+				return texture;
+			})()
+		});
+
 		// Create the wall models.
 		var walls = {
 			north: new THREE
 				.Mesh(
 					new THREE.PlaneGeometry(128, 64),
-					new THREE.MeshBasicMaterial({ color: 0xcccccc, side: THREE.DoubleSide })
+					wallMaterial
 				)
 				.translateX(0)
 				.translateY(0)
@@ -70,7 +80,7 @@
 			south: new THREE
 				.Mesh(
 					new THREE.PlaneGeometry(128, 64),
-					new THREE.MeshBasicMaterial({ color: 0xcccccc, side: THREE.DoubleSide })
+					wallMaterial
 				)
 				.translateX(0)
 				.translateY(0)
@@ -79,7 +89,7 @@
 			east: new THREE
 				.Mesh(
 					new THREE.PlaneGeometry(128, 64),
-					new THREE.MeshBasicMaterial({ color: 0xcccccc, side: THREE.DoubleSide })
+					wallMaterial
 				)
 				.rotateY(PI / 2)
 				.translateX(0)
@@ -89,7 +99,7 @@
 			west: new THREE
 				.Mesh(
 					new THREE.PlaneGeometry(128, 64),
-					new THREE.MeshBasicMaterial({ color: 0xcccccc, side: THREE.DoubleSide })
+					wallMaterial
 				)
 				.rotateY(-PI / 2)
 				.translateX(0)
@@ -99,7 +109,15 @@
 			ceiling: new THREE
 				.Mesh(
 					new THREE.PlaneGeometry(128, 128),
-					new THREE.MeshBasicMaterial({ color: 0x333333, side: THREE.DoubleSide })
+					new THREE.MeshBasicMaterial({
+						side: THREE.DoubleSide,
+						map: (function() {
+							var texture = new THREE.ImageUtils.loadTexture("../images/ceiling.jpg");
+							texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+							texture.repeat.set(6, 6);
+							return texture;
+						})()
+					})
 				)
 				.rotateX(PI / 2)
 				.translateX(0)
@@ -112,7 +130,7 @@
 					new THREE.MeshBasicMaterial({
 						side: THREE.DoubleSide,
 						map: (function() {
-							var texture = new THREE.ImageUtils.loadTexture("../images/checkerboard.jpg")
+							var texture = new THREE.ImageUtils.loadTexture("../images/checkerboard.jpg");
 							texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
 							texture.repeat.set(5, 5);
 							return texture;
