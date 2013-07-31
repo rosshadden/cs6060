@@ -1,6 +1,9 @@
 (function(window, undefined) {
 	"use strict";
 
+	// GLOBALS
+	var scene, camera, renderer;
+
 	var PI = Math.PI;
 	var axes = {
 		x: new THREE.Vector3(1, 0, 0),
@@ -9,19 +12,23 @@
 		matrix: new THREE.Matrix4()
 	};
 
-	var rotWorldMatrix;
-	// Rotate an object around an arbitrary axis in world space.
-	var rotateAroundAxis = function(object, axis, radians) {
-		rotWorldMatrix = new THREE.Matrix4();
-		rotWorldMatrix.makeRotationAxis(axis.normalize(), radians);
-		// Pre-multiply.
-		rotWorldMatrix.multiply(object.matrix);
-		object.matrix = rotWorldMatrix;
-		object.rotation.setFromRotationMatrix(object.matrix);
+	// UTILITIES
+	var utils = (function() {
+		var rotWorldMatrix;
+		// Rotate an object around an arbitrary axis in world space.
+		var rotateAroundAxis = function(object, axis, radians) {
+			rotWorldMatrix = new THREE.Matrix4();
+			rotWorldMatrix.makeRotationAxis(axis.normalize(), radians);
+			// Pre-multiply.
+			rotWorldMatrix.multiply(object.matrix);
+			object.matrix = rotWorldMatrix;
+			object.rotation.setFromRotationMatrix(object.matrix);
+		};
+
+		return { rotateAroundAxis: rotateAroundAxis };
 	};
 
 	// INIT
-	var scene, camera, renderer;
 	(function() {
 		// Create the scene and camera.
 		scene = new THREE.Scene();
