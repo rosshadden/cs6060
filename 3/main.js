@@ -362,19 +362,25 @@
 		}
 	};
 
-	var update = function() {
+	var update = function(clock) {
+		if ((~~clock + 5e3) % 1e4 >= 5e3) {
+			models.face.position.y += 0.02;
+		} else {
+			models.face.position.y -= 0.02;
+		}
+
 		models.face.lookAt(camera.position.clone().multiplyScalar(-1));
 	};
 
 	// START
 	// Run the animation loop.
-	(function render() {
+	(function render(clock) {
 		// Loop-de-loop.
 		requestAnimationFrame(render);
 		// Handle user input.
-		controls();
+		controls(clock);
 		// Update anything else necessary.
-		update();
+		update(clock);
 		// Render the scene, from the perspective of the camera.
 		renderer.render(scene, camera);
 	})();
