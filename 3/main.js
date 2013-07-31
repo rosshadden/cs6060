@@ -26,7 +26,7 @@
 		};
 
 		return { rotateAroundAxis: rotateAroundAxis };
-	};
+	})();
 
 	// INIT
 	(function() {
@@ -46,7 +46,7 @@
 	(function() {
 		camera.speed = 1;
 		camera.lookAt(axes.z);
-		camera.position.set(0, 0, 0);
+		camera.position.set(0, 0, -48);
 		scene.add(camera);
 
 		// Show axes, for debugging.
@@ -191,9 +191,18 @@
 				.translateZ(-48);
 		})();
 
+		var pedestal = new THREE
+			.Mesh(
+				new THREE.CubeGeometry(16, 24, 16),
+				new THREE.MeshBasicMaterial({ color: 0x957E62 })
+			)
+			.translateY(-20)
+		;
+
 		return {
 			walls: walls,
-			chair: chair
+			chair: chair,
+			pedestal: pedestal
 		};
 	})();
 
@@ -212,6 +221,9 @@
 		for (var c = 0; c < numChairs; c++) {
 			scene.add(models.chair.clone().translateX(c * 20));
 		}
+
+		// Add the pedestal for the head to sit on.
+		scene.add(models.pedestal);
 	})();
 
 	// START
@@ -253,11 +265,11 @@
 		}
 		// Turn left.
 		if (KeyboardJS.combo.active("left")) {
-			rotateAroundAxis(camera, axes.y, +PI/64);
+			utils.rotateAroundAxis(camera, axes.y, +PI/64);
 		}
 		// Turn right.
 		if (KeyboardJS.combo.active("right")) {
-			rotateAroundAxis(camera, axes.y, -PI/64);
+			utils.rotateAroundAxis(camera, axes.y, -PI/64);
 		}
 		// Move faster.
 		if (KeyboardJS.combo.active("shift")) {
