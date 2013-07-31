@@ -193,7 +193,8 @@
 
 		var tube = new THREE.Mesh(
 			new THREE.CylinderGeometry(16, 16, 62, 64),
-			new THREE.MeshBasicMaterial({ color: 0x7EB6FF, transparent: true, opacity: 0.4 })
+			// new THREE.MeshBasicMaterial({ color: 0x7EB6FF, transparent: true, opacity: 0.4 })
+			new THREE.MeshBasicMaterial({ color: 0xccccff, transparent: true, opacity: 0.4 })
 		);
 
 		var face = (function() {
@@ -227,28 +228,54 @@
 
 			var mouth = new THREE
 				.Mesh(
-					new THREE.CylinderGeometry(2, 0, 1),
-					new THREE.MeshBasicMaterial({ color: 0xff0000 })
+					new THREE.CylinderGeometry(0.2, 0, 1, 64),
+					new THREE.MeshBasicMaterial({ color: 0x660000 })
 				)
 				.translateY(-4)
-				.translateZ(-12)
-				.rotateX(PI / 2)
+				.translateZ(-11.3)
+				.rotateX(PI / 2.5)
 				.rotateY(PI)
 			;
+
+			var tooth = new THREE
+				.Mesh(
+					new THREE.CubeGeometry(1.6, 1.6, 0.2),
+					new THREE.MeshBasicMaterial({ color: 0xffffff })
+				)
+				.translateY(-2.6)
+				.translateZ(-12)
+				.rotateX(0.5)
+			;
+
+			var teeth = [
+				tooth.clone().translateX(1.2),
+				tooth.clone().translateX(-1.2)
+			];
+
+			mouth.scale.x = 20;
+			mouth.scale.z = 16;
 
 			THREE.GeometryUtils.setMaterialIndex(head, 0);
 			THREE.GeometryUtils.setMaterialIndex(nose.geometry, 1);
 			THREE.GeometryUtils.setMaterialIndex(eyes[0].geometry, 2);
 			THREE.GeometryUtils.setMaterialIndex(eyes[1].geometry, 2);
+			THREE.GeometryUtils.setMaterialIndex(mouth.geometry, 3);
+			THREE.GeometryUtils.setMaterialIndex(teeth[0].geometry, 2);
+			THREE.GeometryUtils.setMaterialIndex(teeth[1].geometry, 2);
 			THREE.GeometryUtils.merge(face, head);
 			THREE.GeometryUtils.merge(face, nose);
 			THREE.GeometryUtils.merge(face, eyes[0]);
 			THREE.GeometryUtils.merge(face, eyes[1]);
+			THREE.GeometryUtils.merge(face, mouth);
+			THREE.GeometryUtils.merge(face, teeth[0]);
+			THREE.GeometryUtils.merge(face, teeth[1]);
 
 			var materials = [
 				new THREE.MeshBasicMaterial({ color: 0xFFCC99 }),
 				nose.material,
-				eye.material
+				eye.material,
+				mouth.material,
+				tooth.material
 			];
 
 			return new THREE.Mesh(face, new THREE.MeshFaceMaterial(materials));
