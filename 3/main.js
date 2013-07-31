@@ -127,15 +127,19 @@
 
 		// Create the chair model.
 		var chair = (function() {
+			var material = new THREE.MeshBasicMaterial({
+				map: new THREE.ImageUtils.loadTexture("../images/crate.png")
+			});
+
 			var chairParts = {
 				back: new THREE.Mesh(
 					new THREE.CubeGeometry(12, 16, 1),
-					new THREE.MeshBasicMaterial({ color: 0x855E42 })
+					material
 				),
 				seat: new THREE
 					.Mesh(
 						new THREE.CubeGeometry(12, 1, 12),
-						new THREE.MeshBasicMaterial({ color: 0x331100 })
+						material
 					)
 					.translateY(-8.5)
 					.translateZ(5.5)
@@ -143,7 +147,7 @@
 				legs: [
 					new THREE.Mesh(
 							new THREE.CylinderGeometry(1, 1, 8),
-							new THREE.MeshBasicMaterial({ color: 0x221100 })
+							material
 						)
 						.translateX(-4)
 						.translateY(-13)
@@ -151,7 +155,7 @@
 					,
 					new THREE.Mesh(
 							new THREE.CylinderGeometry(1, 1, 8),
-							new THREE.MeshBasicMaterial({ color: 0x221100 })
+							material
 						)
 						.translateX(4)
 						.translateY(-13)
@@ -159,7 +163,7 @@
 					,
 					new THREE.Mesh(
 							new THREE.CylinderGeometry(1, 1, 8),
-							new THREE.MeshBasicMaterial({ color: 0x221100 })
+							material
 						)
 						.translateX(-4)
 						.translateY(-13)
@@ -167,7 +171,7 @@
 					,
 					new THREE.Mesh(
 							new THREE.CylinderGeometry(1, 1, 8),
-							new THREE.MeshBasicMaterial({ color: 0x221100 })
+							material
 						)
 						.translateX(4)
 						.translateY(-13)
