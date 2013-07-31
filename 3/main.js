@@ -127,72 +127,55 @@
 
 		// Create the chair model.
 		var chair = (function() {
+			var chair = new THREE.Geometry();
 			var material = new THREE.MeshBasicMaterial({
 				map: new THREE.ImageUtils.loadTexture("../images/crate.png")
 			});
 
 			var chairParts = {
 				back: new THREE.Mesh(
-					new THREE.CubeGeometry(12, 16, 1),
-					material
+					new THREE.CubeGeometry(12, 16, 1), null
 				),
-				seat: new THREE
-					.Mesh(
+				seat: new THREE.Mesh(
 						new THREE.CubeGeometry(12, 1, 12),
 						new THREE.MeshBasicMaterial({ color: 0x331100 })
 					)
 					.translateY(-8.5)
 					.translateZ(5.5)
 				,
-				legs: [
-					new THREE.Mesh(
-							new THREE.CylinderGeometry(1, 1, 8),
-							material
-						)
-						.translateX(-4)
-						.translateY(-13)
-						.translateZ(1)
-					,
-					new THREE.Mesh(
-							new THREE.CylinderGeometry(1, 1, 8),
-							material
-						)
-						.translateX(4)
-						.translateY(-13)
-						.translateZ(1)
-					,
-					new THREE.Mesh(
-							new THREE.CylinderGeometry(1, 1, 8),
-							material
-						)
-						.translateX(-4)
-						.translateY(-13)
-						.translateZ(10)
-					,
-					new THREE.Mesh(
-							new THREE.CylinderGeometry(1, 1, 8),
-							material
-						)
-						.translateX(4)
-						.translateY(-13)
-						.translateZ(10)
-				]
+				leg: new THREE.Mesh(
+						new THREE.CylinderGeometry(1, 1, 8), null
+					)
+					.translateY(-13)
 			};
+
+			chairParts.legs = [
+				chairParts.leg.clone()
+					.translateX(-4)
+					.translateZ(1),
+				chairParts.leg.clone()
+					.translateX(4)
+					.translateZ(1),
+				chairParts.leg.clone()
+					.translateX(-4)
+					.translateZ(10),
+				chairParts.leg.clone()
+					.translateX(4)
+					.translateZ(10)
+			];
 
 			var materials = [
 				chairParts.seat.material,
-				chairParts.back.material
+				material
 			];
 
-			var chair = new THREE.Geometry();
 			THREE.GeometryUtils.setMaterialIndex(chairParts.seat.geometry, 0);
-			THREE.GeometryUtils.merge(chair, chairParts.seat);
 			THREE.GeometryUtils.setMaterialIndex(chairParts.back.geometry, 1);
+			THREE.GeometryUtils.merge(chair, chairParts.seat);
 			THREE.GeometryUtils.merge(chair, chairParts.back);
 
-			chairParts.legs.forEach(function(leg, l) {
-				materials.push(leg.material);
-				THREE.GeometryUtils.setMaterialIndex(leg.geometry, l + 2);
+			chairParts.legs.forEach(function(leg) {
+				THREE.GeometryUtils.setMaterialIndex(leg.geometry, 1);
 				THREE.GeometryUtils.merge(chair, leg);
 			});
 
@@ -205,8 +188,7 @@
 
 		var tube = new THREE.Mesh(
 			new THREE.CylinderGeometry(16, 16, 62, 64),
-			// new THREE.MeshBasicMaterial({ color: 0x7EB6FF, transparent: true, opacity: 0.4 })
-			new THREE.MeshBasicMaterial({ color: 0xccccff, transparent: true, opacity: 0.4 })
+			new THREE.MeshBasicMaterial({ color: 0x7EB6FF, transparent: true, opacity: 0.5 })
 		);
 
 		var face = (function() {
@@ -381,6 +363,7 @@
 			models.face.position.y -= 0.02;
 		}
 
+		// Make the face creepily follow the camera.
 		models.face.lookAt(camera.position.clone().multiplyScalar(-1));
 	};
 
@@ -396,8 +379,4 @@
 		// Render the scene, from the perspective of the camera.
 		renderer.render(scene, camera);
 	})();
-
-	// DEBUG
-	window.camera = camera;
-	window.models = models;
 })(this);
