@@ -56,7 +56,7 @@
 
 	// MODELS
 	var models = (function() {
-		var wallMaterial = new THREE.MeshBasicMaterial({
+		var wallMaterial = new THREE.MeshLambertMaterial({
 			side: THREE.DoubleSide,
 			map: (function() {
 				var texture = new THREE.ImageUtils.loadTexture("../images/wallpaper.jpg");
@@ -109,7 +109,7 @@
 			ceiling: new THREE
 				.Mesh(
 					new THREE.PlaneGeometry(128, 128),
-					new THREE.MeshBasicMaterial({
+					new THREE.MeshLambertMaterial({
 						side: THREE.DoubleSide,
 						map: (function() {
 							var texture = new THREE.ImageUtils.loadTexture("../images/ceiling.jpg");
@@ -127,7 +127,7 @@
 			floor: new THREE
 				.Mesh(
 					new THREE.PlaneGeometry(128, 128),
-					new THREE.MeshBasicMaterial({
+					new THREE.MeshLambertMaterial({
 						side: THREE.DoubleSide,
 						map: (function() {
 							var texture = new THREE.ImageUtils.loadTexture("../images/checkerboard.jpg");
@@ -146,7 +146,7 @@
 		// Create the chair model.
 		var chair = (function() {
 			var chair = new THREE.Geometry();
-			var material = new THREE.MeshBasicMaterial({
+			var material = new THREE.MeshLambertMaterial({
 				map: new THREE.ImageUtils.loadTexture("../images/crate.png")
 			});
 
@@ -156,7 +156,7 @@
 				),
 				seat: new THREE.Mesh(
 						new THREE.CubeGeometry(12, 1, 12),
-						new THREE.MeshBasicMaterial({ color: 0x331100 })
+						new THREE.MeshLambertMaterial({ color: 0x331100 })
 					)
 					.translateY(-8.5)
 					.translateZ(5.5)
@@ -206,7 +206,7 @@
 
 		var tube = new THREE.Mesh(
 			new THREE.CylinderGeometry(16, 16, 62, 64),
-			new THREE.MeshBasicMaterial({ color: 0x7EB6FF, transparent: true, opacity: 0.4 })
+			new THREE.MeshLambertMaterial({ color: 0x7EB6FF, transparent: true, opacity: 0.4 })
 		);
 
 		var face = (function() {
@@ -217,7 +217,7 @@
 			var nose = new THREE
 				.Mesh(
 					new THREE.CylinderGeometry(1, 0, 1),
-					new THREE.MeshBasicMaterial({ color: 0xeebb99 })
+					new THREE.MeshLambertMaterial({ color: 0xeebb99 })
 				)
 				.translateZ(-12.5)
 				.rotateX(PI / 2)
@@ -226,7 +226,7 @@
 			var eye = new THREE
 				.Mesh(
 					new THREE.CylinderGeometry(2, 0, 1),
-					new THREE.MeshBasicMaterial({ color: 0xffffff })
+					new THREE.MeshLambertMaterial({ color: 0xffffff })
 				)
 				.translateY(4)
 				.translateZ(-11)
@@ -241,7 +241,7 @@
 			var mouth = new THREE
 				.Mesh(
 					new THREE.CylinderGeometry(0.2, 0, 1, 64),
-					new THREE.MeshBasicMaterial({ color: 0x660000 })
+					new THREE.MeshLambertMaterial({ color: 0x660000 })
 				)
 				.translateY(-4)
 				.translateZ(-11.3)
@@ -252,7 +252,7 @@
 			var tooth = new THREE
 				.Mesh(
 					new THREE.CubeGeometry(1.6, 1.6, 0.2),
-					new THREE.MeshBasicMaterial({ color: 0xffffff })
+					new THREE.MeshLambertMaterial({ color: 0xffffff })
 				)
 				.translateY(-2.6)
 				.translateZ(-12)
@@ -283,7 +283,7 @@
 			THREE.GeometryUtils.merge(face, teeth[1]);
 
 			var materials = [
-				new THREE.MeshBasicMaterial({ color: 0xFFCC99 }),
+				new THREE.MeshLambertMaterial({ color: 0xFFCC99 }),
 				nose.material,
 				eye.material,
 				mouth.material,
@@ -321,6 +321,15 @@
 		scene.add(models.tube);
 		// Add the face.
 		scene.add(models.face);
+
+		// Add some lights.
+		var light = new THREE.PointLight(0xffffff, 0.8);
+		var lights = [light.clone(), light.clone()];
+		lights[0].position.set(0, 0, +60);
+		lights[1].position.set(0, 0, -60);
+		lights.forEach(function(light, l) {
+			scene.add(light);
+		});
 	})();
 
 	var cameraSpeed;
