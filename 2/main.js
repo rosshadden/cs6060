@@ -1,4 +1,6 @@
 (function(window, undefined) {
+	"use strict";
+
 	// INIT
 	var scene, camera, renderer;
 	(function() {
