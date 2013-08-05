@@ -1,42 +1,46 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
+
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>cs6060 by rosshadden</title>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="cs6060 : cs6060 - Computer Graphics" />
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="javascripts/scale.fix.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <title>cs6060</title>
   </head>
+
   <body>
-    <div class="wrapper">
-      <header>
-        <h1>cs6060</h1>
-        <p>cs6060 - Computer Graphics</p>
-        <p class="view"><a href="https://github.com/rosshadden/cs6060">View the Project on GitHub <small>rosshadden/cs6060</small></a></p>
-        <ul>
-          <li><a href="https://github.com/rosshadden/cs6060/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/rosshadden/cs6060/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/rosshadden/cs6060">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/rosshadden/cs6060">View on GitHub</a>
+
+          <h1 id="project_title">cs6060</h1>
+          <h2 id="project_tagline">cs6060 - Computer Graphics</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/rosshadden/cs6060/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/rosshadden/cs6060/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
         <h3>
 <a name="computer-graphics-assignments" class="anchor" href="#computer-graphics-assignments"><span class="octicon octicon-link"></span></a>Computer Graphics Assignments</h3>
 
 <p>I have hosted the homework assignments online so that you can just hit them from a browser on any computer.  Assignment 2 is located <a href="http://rosshadden.github.io/cs6060/2">here</a>, and assignments 3-7 are located <a href="http://rosshadden.github.io/cs6060/room">here</a>.  I am still sending you the files so you can see the code, but you can and should view the actual running webGL from this URL.  The reason is that when the page is viewed locally you can't load image files like the textures I am using--it needs to be hosted by a webserver.</p>
 
 <h3>
-<a name="assignment-2" class="anchor" href="#assignment-2"><span class="octicon octicon-link"></span></a><a href="http://rosshadden.github.io/cs6060/2">Assignment 2</a>
+<a name="assignment-2" class="anchor" href="#assignment-2"><span class="octicon octicon-link"></span></a><a href="http://rosshadden.github.io/cs6060/shield">Assignment 2</a>
 </h3>
 
-<p>This can be found in the folder entitled "2".  Within is the shield that I showed during class, created with webGL.  The image may seem simple, but drawing the star was actually rather involved, and what you see is actually my 5th or 6th attempt at creating it.</p>
+<p>This can be found in the folder entitled "shield".  Within is the shield that I showed during class, created with webGL.  The image may seem simple, but drawing the star was actually rather involved, and what you see is actually my 5th or 6th attempt at creating it.</p>
 
 <h3>
 <a name="assignments-3-7" class="anchor" href="#assignments-3-7"><span class="octicon octicon-link"></span></a><a href="http://rosshadden.github.io/cs6060/room">Assignments 3-7</a>
@@ -45,16 +49,40 @@
 <p>The rest of the homework assignments are all within the folder entitled "room", as that single folder contains the combined work from each of the individual assignments.</p>
 
 <h4>
-<a name="assignment-3" class="anchor" href="#assignment-3"><span class="octicon octicon-link"></span></a>Assignment 3</h4>
+<a name="assignment-3---3d-models-room-furniture-head" class="anchor" href="#assignment-3---3d-models-room-furniture-head"><span class="octicon octicon-link"></span></a>Assignment 3 - 3D Models {room, furniture, head}</h4>
 
-<p>test</p>
+<p>In the project, there are six planes (making up the 4 walls, ceiling, and floor) which together serve to create the room.  There are also six chairs, which fulfill the furniture requirement of the assignment, as well as a floating head which fulfills the head model requirement.</p>
+
+<h4>
+<a name="assignment-4---user-interaction" class="anchor" href="#assignment-4---user-interaction"><span class="octicon octicon-link"></span></a>Assignment 4 - User Interaction</h4>
+
+<p>In this room, you can use the WASD keys to navigate the camera, the arrow keys to rotate the camera, and spacebar/c to relatively move the camera up/down respectively.  This, along with the floating head following the camera as it moves, fulfills the requirements for this assignment.</p>
+
+<h4>
+<a name="assignment-5---materials-and-textures" class="anchor" href="#assignment-5---materials-and-textures"><span class="octicon octicon-link"></span></a>Assignment 5 - Materials and Textures</h4>
+
+<p>The walls have been given a "wallpaper" sort of texture, the ceiling has been given a texture to make it look like a typical ceiling, and the floor has been given a checkered pattern, comparable to common marble floor tiles.  The chairs have two different textures--one is a wooden crate texture for the backs and legs of the chairs, and the other is a solid brownish material to make the seats.  There is also a transparent material given to the tube that the face floats in, and the face itself has several solid material textures.</p>
+
+<h4>
+<a name="assignment-6---lighting" class="anchor" href="#assignment-6---lighting"><span class="octicon octicon-link"></span></a>Assignment 6 - Lighting</h4>
+
+<p>There are two lights in the scene.  One in the north-east corner and one in the south-west corner of the room.  Also the materials are all using a MeshLambertMaterial, which is what allows the light to affect them.  Without these lights the scene is pitch-black, which can be apparent by moving the camera outside the walls.  Since the are no lights outside the room, the outside walls are seen as black.</p>
+
+<h4>
+<a name="assignment-7---animation" class="anchor" href="#assignment-7---animation"><span class="octicon octicon-link"></span></a>Assignment 7 - Animation</h4>
+
+<p>The creepy head in the center of the room slowly oscillates on it's vertical axis.  Also as you move the camera around, the head's rotation updates to match that of the camera--effectively making it constantly watch the user.</p>
       </section>
     </div>
-    <footer>
-      <p>Project maintained by <a href="https://github.com/rosshadden">rosshadden</a></p>
-      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
-    </footer>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">cs6060 maintained by <a href="https://github.com/rosshadden">rosshadden</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
               <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
@@ -65,6 +93,7 @@
             pageTracker._trackPageview();
             } catch(err) {}
           </script>
+
 
   </body>
 </html>
